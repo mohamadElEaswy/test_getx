@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:test_getx/api/base_url.dart';
 import 'package:test_getx/api/dio.dart';
+import 'package:test_getx/api/model.dart';
 import 'package:test_getx/routes.dart';
 
 import 'controller.dart';
@@ -34,7 +35,14 @@ class Home extends StatelessWidget {
             ElevatedButton(
               onPressed: () async {
                 await network.dioInit();
-                await network.get(path: BaseUrls.products);
+                // late DataModel data;
+
+                await network.get(path: BaseUrls.products).then((value) {
+                  // data =
+
+                  debugPrint(
+                      DataModel.fromJson(value.data).data!.products![0].title);
+                });
               },
               child: const Text('Test API'),
             ),
