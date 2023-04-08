@@ -42,7 +42,9 @@ class NetworkHelper {
         'Authorization': 'Bearer $token'
       },
     );
-    debugPrint(response.data);
+    debugPrint(response.statusMessage.toString());
+    debugPrint(response.statusCode.toString());
+    debugPrint(response.data.toString());
 
     return response;
   }
