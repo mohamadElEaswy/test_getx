@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:test_getx/api/api_controller.dart';
-import 'package:test_getx/api/base_url.dart';
-import 'package:test_getx/api/dio.dart';
+// import 'package:test_getx/api/base_url.dart';
+// import 'package:test_getx/api/dio.dart';
 import 'package:test_getx/api/model.dart';
 
 import 'controller.dart';
@@ -26,18 +26,18 @@ class Home extends StatelessWidget {
         ),
 
         // Replace the 8 lines Navigator.push by a simple Get.to(). You don't need context
-        body: FutureBuilder<DataModel>(
-          future: api.getData(),
+        body: FutureBuilder<RxList<Product>>(
+          future: api.fetchProducts(),
           builder: (context, snapshot) {
             return snapshot.connectionState == ConnectionState.waiting ||
                     snapshot.data == null
                 ? const Center(child: CircularProgressIndicator())
                 : ListView.builder(
-                    itemCount: snapshot.data!.data!.products!.length,
+                    itemCount: snapshot.data!.length,
                     itemBuilder: (context, index) => Center(
                         child: Padding(
                       padding: const EdgeInsets.all(20.0),
-                      child: Text(snapshot.data!.data!.products![index].title!),
+                      child: Text(snapshot.data![index].title!),
                     )),
                   );
           },

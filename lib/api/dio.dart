@@ -30,12 +30,14 @@ class NetworkHelper {
     );
   }
 
-  Future<Response> get({required String path, String? token
-      // , String? lang = 'en'
-      }) async {
+  Future<Response<T>> get<T>({
+    required String path,
+    String? token,
+    // , String? lang = 'en'
+  }) async {
     // final prefs = await SharedPreferences.getInstance();
     // String? locale = prefs.getString('locale');
-    Response response = await dio!.get(
+    Response<T> response = await dio!.get(
       path,
       queryParameters: {
         // 'lang': locale,
